@@ -167,18 +167,22 @@ size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp)
 
 int main(int argc, char* args[])
 {
-    int numberOfSquares =0;
-    int unitSondageMaliyet=0;
+    int numberOfSquares = 0;
+    int unitSondageMaliyet = 0;
     int platformMaliyet;
-    printf("Lutfen 0-10 arasinda deger alacak birim sondaj maliyetini giriniz: ");
-    scanf("%d",&unitSondageMaliyet);
+
+    // Get unit sondage cost from user input
+    printf("Please enter a unit sondage cost between 0 and 10: ");
+    scanf("%d", &unitSondageMaliyet);
+
     if(!(unitSondageMaliyet < 10 && unitSondageMaliyet > 0))
     {
-        printf("Lutfen belirtilen skalada deger giriniz.\nCıkıs yapiliyor.");
+        printf("Please enter a value on the specified scale.\nExiting.");
         return 0;
     }
-    printf("\Lutfen birim platform maliyetini giriniz: ");
-    scanf("%d",&platformMaliyet);
+    // Get platform cost from user input
+    printf("Please enter the platform cost: ");
+    scanf("%d", &platformMaliyet);
     printf("\n\n\n");
 
     int choice;
@@ -297,7 +301,7 @@ int main(int argc, char* args[])
         drawGrid(renderer);
 
         SDL_Init(SDL_INIT_VIDEO);
-        SDL_Window* window2 = SDL_CreateWindow("Sondaj Sade Hali", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+        SDL_Window* window2 = SDL_CreateWindow("Sondage Plain Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
         SDL_Renderer* renderer2 = SDL_CreateRenderer(window2, -1, SDL_RENDERER_ACCELERATED);
 
         SDL_SetRenderDrawColor(renderer2, 0, 0, 0, 0);
@@ -590,17 +594,21 @@ int main(int argc, char* args[])
                 }
             }
         }
-        printf("Sectiginiz veri seti: \n");
+
+        // Print the selected dataset and total cost
+	printf("Sectiginiz veri seti: \n");
         printDataset(&dataset,choice);
 
+	// Calculate the total cost of sondage and platform
         int totalCostofSondage = numberOfSquares * unitSondageMaliyet;
         int totalPlatformMaliyet = numberOfSquares * platformMaliyet;
-        printf("\n\nPoligondaki kare sayisi: %d\n",numberOfSquares);
-        printf("Toplam maliyet: %d\n",totalCostofSondage+totalPlatformMaliyet);
+	int toplamMaliyet = totalCostofSondage + totalPlatformMaliyet;
+        
+	printf("\nNumber of squares in the polygon: %d\n", numberOfSquares);
+        printf("Total cost: %d\n", totalSondageCost + totalPlatformCost);
 
-        int toplamMaliyet = totalCostofSondage + totalPlatformMaliyet;
-
-        calculateArea(originalPoints, dataset.numPoints, toplamMaliyet);
+        // Calculate area using original points and total cost
+	calculateArea(originalPoints, dataset.numPoints, toplamMaliyet);
 
         SDL_RenderPresent(renderer);
 
@@ -610,7 +618,9 @@ int main(int argc, char* args[])
         bool running = true;
         SDL_Event event;
         bool quit = false;
-        while (!quit)
+        
+        // Event loop
+	while (!quit)
         {
             while (SDL_PollEvent(&event))
             {
@@ -621,7 +631,7 @@ int main(int argc, char* args[])
             }
         }
 
-
+	// Cleanup and free resources
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
         SDL_DestroyRenderer(renderer2);
