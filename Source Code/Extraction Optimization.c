@@ -20,7 +20,7 @@ struct Point
 
 struct DataSet
 {
-    struct Point points[20];  // Bir veri kumesinde 20'den fazla nokta olmayacagını varsayıyoruz
+    struct Point points[20];  // Assuming there won't be more than 20 points in a data set
     int numPoints;
 };
 struct FilledSquare
@@ -51,7 +51,6 @@ int checkInside(struct Point poly[], int n, struct Point p)
     return 0;
 }
 
-
 int doesSquareOverlap(struct FilledSquare filledSquares[], int numFilledSquares, int x, int y, int width, int height)
 {
     for (int i = 0; i < numFilledSquares; i++)
@@ -63,67 +62,59 @@ int doesSquareOverlap(struct FilledSquare filledSquares[], int numFilledSquares,
 
         if (x < x2 && x + width > x1 && y < y2 && y + height > y1)
         {
-            // Ust uste kare algiladik
+            // Detected overlapping squares
             return 1;
         }
     }
     return 0;
 }
 
-
-// Ici dolu bir kare cizme islevi bu fonksiyonda yapiyoruz
-void drawFilledSquare(SDL_Renderer* renderer, int x1, int y1, int x2, int y, int r,int g,int b, int a)
+// Function to draw a filled square, performs this operation here
+void drawFilledSquare(SDL_Renderer* renderer, int x1, int y1, int x2, int y, int r, int g, int b, int a)
 {
-    int size = abs(x2 - x1); // Boyutu x koordinatlarına gore hesaplayin
+    int size = abs(x2 - x1); // Calculate size based on x coordinates
 
-    // Kare cizim hazir fonksiyonlarını burada yazdik
-    SDL_SetRenderDrawColor(renderer, r, g, b, a); // Rengin formati (R, G, B, A) (Kirmizi, Yesil, Mavi, Alpha kanali saydamlik ayari icin)
-    SDL_RenderDrawRect(renderer, &(SDL_Rect)
-    {
-        x1, y1, size, size
-    }); // Karenin dis hatti
-    SDL_RenderFillRect(renderer, &(SDL_Rect)
-    {
-        x1, y1, size, size
-    }); // Karenin ici
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Burada siyah rengine tekrardan ayarliyoruz
+    // Drawing the square using built-in drawing functions here
+    SDL_SetRenderDrawColor(renderer, r, g, b, a); // Color format (R, G, B, A) (Red, Green, Blue, Alpha for transparency)
+    SDL_RenderDrawRect(renderer, &(SDL_Rect) { x1, y1, size, size }); // Square outline
+    SDL_RenderFillRect(renderer, &(SDL_Rect) { x1, y1, size, size }); // Square fill
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Reset color to black here
 }
-
 
 void drawGrid(SDL_Renderer* renderer)
 {
-    // Alpha kanali ile saydamligi degistirmek icin Blendmode'u aktif hale getiriyoruz
+    // Activating Blendmode to change transparency with alpha channel
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
-    // Grid rengini acık gri olarak ayarladik
+    // Set grid color to light gray
     SDL_SetRenderDrawColor(renderer, 200, 200, 200, 40);
 
-    // Yatay grid cizgilerini ciziyoruz
+    // Draw horizontal grid lines
     for (int y = 0; y <= SCREEN_HEIGHT; y += GRID_SIZE)
     {
         SDL_RenderDrawLine(renderer, 0, y, SCREEN_WIDTH, y);
     }
 
-    // Dikey grid cizgilerini ciziyoruz
+    // Draw vertical grid lines
     for (int x = 0; x <= SCREEN_WIDTH; x += GRID_SIZE)
     {
         SDL_RenderDrawLine(renderer, x, 0, x, SCREEN_HEIGHT);
     }
 }
 
-
 void printDataset(const struct DataSet* dataset, int choice)
 {
-    printf("%dB",choice);
+    printf("%dB", choice);
 
     for (int i = 0; i < dataset->numPoints; ++i)
     {
-        printf("(%d,%d)", (dataset->points[i].x)/16, (dataset->points[i].y)/16);
+        printf("(%d,%d)", (dataset->points[i].x) / 16, (dataset->points[i].y) / 16);
     }
     printf("F\n");
 }
-// Alani Shoelace formulu kullanarak hesapladik
-void calculateArea(struct Point* polygon, int numVertices,int toplamMaliyet)
+
+// Calculating area using the Shoelace formula
+void calculateArea(struct Point* polygon, int numVertices, int totalCost)
 {
     double area = 0.0;
 
@@ -132,21 +123,22 @@ void calculateArea(struct Point* polygon, int numVertices,int toplamMaliyet)
         area += (polygon[i].x * polygon[i + 1].y) - (polygon[i + 1].x * polygon[i].y);
     }
 
-    // Son islem olarak sonuncu x ve y ile baslangıc x ve y degerini isleme sokuyoruz
+    // Finally, apply the last operation using the first and last x, y values
     area += (polygon[numVertices - 1].x * polygon[0].y) - (polygon[0].x * polygon[numVertices - 1].y);
 
-    // Alanin mutlak degerini hesaplayin ve 2'ye bolun
-    area = abs(area) / 2.0 ;
+    // Calculate the absolute value of the area and divide by 2
+    area = abs(area) / 2.0;
 
-    // Orijinal alani 10 ile carparak yeni bir 'rezerv' degiskeni olusturduk
+    // Multiply the original area by 10 to create a 'reserve' variable
     double reserve = area * 10;
-    double kar = reserve - toplamMaliyet;
+    double profit = reserve - totalCost;
 
-    printf("Cokgenin alani: %.2f\n", area);
-    printf("Rezerv degeri: %.2f\n", reserve);
-    printf("Toplam kar miktari: %.2f",kar);
+    printf("Polygon area: %.2f\n", area);
+    printf("Reserve value: %.2f\n", reserve);
+    printf("Total profit amount: %.2f", profit);
 }
-// Daha estetik bir cizim icin 16 kat buyuk olcude cizim yaptik
+
+// Perform scaling for a more aesthetic representation; drawing 16 times larger
 void scaleCoordinates(struct Point* points, int numPoints, float scaleFactor)
 {
     for (int i = 0; i < numPoints; ++i)
@@ -156,17 +148,17 @@ void scaleCoordinates(struct Point* points, int numPoints, float scaleFactor)
     }
 }
 
-// Alinan verileri islemek icin bu geri arama islevi cagrilacak
-size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
+// Callback function to process received data
+size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp)
 {
     size_t real_size = size * nmemb;
-    char **data = (char **)userp;
+    char** data = (char**)userp;
 
-    // Veriler icin bellegi yeniden tahsis ettik
-    *data = (char *)realloc(*data, real_size + 1);
+    // Reallocate memory for data
+    *data = (char*)realloc(*data, real_size + 1);
     if (*data)
     {
-        // Alinan verileri karakter dizisine kopyaladik
+        // Copy received data into a string
         memcpy(*data, contents, real_size);
         (*data)[real_size] = '\0';
     }
