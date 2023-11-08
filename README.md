@@ -3,20 +3,23 @@
 This project, conducted at Kocaeli University's Computer Engineering Department, aims to optimize natural resource exploration and extraction operations in oceans. The goal is to divide the search area into accurate and optimal parcels to maximize profits for a company involved in these operations.
 ## Contributors
 <div align="center">
-  <a href="https://linkedin.com/in/emircankartal" target="blank"><img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="emircankartal" height="27" width="36" /></a>
-  <br />
-  Emircan Kartal
-  <br />
-  <a href="mailto:emircankartal1@gmail.com"><img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/mail.svg" alt="Email" height="27" width="36" /></a>
+  <div style="float: left; padding-right: 20px;">
+    <a href="https://linkedin.com/in/emircankartal" target="blank"><img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="emircankartal" height="27" width="36" /></a>
+    <br />
+    **Emircan Kartal**
+    <br />
+    <a href="mailto:emircan@example.com"><img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/mail.svg" alt="Email" height="27" width="36" /></a>
+  </div>
+  <div style="float: right; padding-left: 20px;">
+    <a href="https://www.linkedin.com/in/cagri-atalar-354692166/" target="blank"><img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="cagriatalar" height="27" width="36" /></a>
+    <br />
+    **Çağrı Atalar**
+    <br />
+    <a href="mailto:cagri@example.com"><img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/mail.svg" alt="Email" height="27" width="36" /></a>
+  </div>
 </div>
-<br />
-<div align="center">
-  <a href="https://www.linkedin.com/in/çağrı-atalar-354692166/" target="blank"><img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="cagriatalar" height="27" width="36" /></a>
-  <br />
-  **Çağrı Atalar**
-  <br />
-  <a href="mailto:cagri.atalar@hotmail.com"><img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/mail.svg" alt="Email" height="27" width="36" /></a>
-</div>
+
+
 
 
 ## Getting Started
