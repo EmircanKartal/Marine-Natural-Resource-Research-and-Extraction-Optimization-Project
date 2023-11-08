@@ -186,7 +186,7 @@ int main(int argc, char* args[])
     printf("\n\n\n");
 
     int choice;
-    printf("Secmek istediginiz koordinat kumesini giriniz:  ");
+    printf("Enter the coordinate set you want to select:  ");
     scanf("%d", &choice);
 
     CURL *curl;
@@ -251,7 +251,7 @@ int main(int argc, char* args[])
         memcpy(originalPoints, dataset.points, sizeof(dataset.points)); // We copy the original coordinates for later use
 
         // Scale the coordinates
-        float scaleFactor = 16.0;  
+        float scaleFactor = 16.0;
         scaleCoordinates(dataset.points, dataset.numPoints, scaleFactor);
 
         // SDL initialization and color codes
@@ -603,7 +603,7 @@ int main(int argc, char* args[])
         int totalCostofSondage = numberOfSquares * unitSondageMaliyet;
         int totalPlatformMaliyet = numberOfSquares * platformMaliyet;
 	int toplamMaliyet = totalCostofSondage + totalPlatformMaliyet;
-        
+
 	printf("\nNumber of squares in the polygon: %d\n", numberOfSquares);
         printf("Total cost: %d\n", toplamMaliyet);
 
@@ -618,7 +618,7 @@ int main(int argc, char* args[])
         bool running = true;
         SDL_Event event;
         bool quit = false;
-        
+
         // Event loop
 	while (!quit)
         {
