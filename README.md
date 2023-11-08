@@ -5,16 +5,14 @@ This project, conducted at Kocaeli University's Computer Engineering Department,
 <a href="https://linkedin.com/in/emircankartal" target="blank"><img align="left" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="emircankartal" height="27" width="36" /></a>
 <strong>Emircan Kartal</strong>
 
-<a href="mailto:emircankarta1@gmail.com"><img align="right" src="path/to/mail-icon.svg" alt="email" height="27" width="36" /></a>
-<strong></strong>
+<strong>📫 How to reach me emircankartal1@gmail.com</strong>
 
 ---
 
 <a href="https://www.linkedin.com/in/çağrı-atalar-354692166/" target="blank"><img align="left" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="cagriatalar" height="27" width="36" /></a>
 <strong>Çağrı Atalar</strong>
 
-<a href="mailto:cagri.atalar@hotmail.com"><img align="right" src="path/to/mail-icon.svg" alt="email" height="27" width="36" /></a>
-<strong></strong>
+<strong>📫 How to reach me cagri.atalar@hotmail.com</strong>
 
 
 
