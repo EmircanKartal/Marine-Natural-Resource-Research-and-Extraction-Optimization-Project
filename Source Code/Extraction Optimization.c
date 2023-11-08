@@ -191,7 +191,7 @@ int main(int argc, char* args[])
 
     CURL *curl;
     CURLcode res;
-    char *data = NULL; // Alinan verileri saklamak icin
+    char *data = NULL; // To store received data
 
     curl = curl_easy_init();
     if (curl)
@@ -199,19 +199,19 @@ int main(int argc, char* args[])
         curl_easy_setopt(curl, CURLOPT_URL, "http://zplusorg.com/prolab.txt");
         curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
 
-        // Callback fonksiyonunu cagiriyoruz
+        // We called the Write callback function
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &data);
 
         res = curl_easy_perform(curl);
-        printf("\n\nAlinan veri:\n%s\n\n", data);
+        printf("\n\nRecieved data:\n%s\n\n", data);
 
         if (res != CURLE_OK)
-            fprintf(stderr, "curl_easy_perform() hata verdi: %s\n", curl_easy_strerror(res));
+            fprintf(stderr, "curl_easy_perform() gave error: %s\n", curl_easy_strerror(res));
 
         struct DataSet dataset;
-        struct Point scaledPoints[10]; // Olculendirilmis koordinatlari bu dizide sakliyoruz
-        printf("Seciminiz : %d\n\n", choice);
+        struct Point scaledPoints[10]; // We store the dimensioned coordinates in this array
+        printf("Your choice: %d\n\n", choice);
 
         int SatirSay = 0;
         char *line = strtok(data, "\n");
@@ -234,36 +234,36 @@ int main(int argc, char* args[])
                     key = strtok(NULL, "(),");
                     int y = atoi(key);
 
-                    // Koordinatlari dataset struct'inda sakliyoruz
+                    // We store the coordinates in the dataset struct
                     dataset.points[i].x = x;
                     dataset.points[i].y = y;
 
                     key = strtok(NULL, "(),");
                     i++;
                 }
-                dataset.numPoints = i; // Veri kumesindeki koordinat sayisini numPoints degiskenine atiyoruz
+                dataset.numPoints = i; // We assign the number of coordinates in the data set to the numPoints variable
                 break;
             }
             line = strtok(NULL, "\n");
         }
 
-        struct Point originalPoints[20]; // Orijinal koordinatlari sakliyoruz
-        memcpy(originalPoints, dataset.points, sizeof(dataset.points)); // Orijinal koordinatlari daha sonra kullanmak icin kopyaliyoruz
+        struct Point originalPoints[20]; // We keep the original coordinates
+        memcpy(originalPoints, dataset.points, sizeof(dataset.points)); // We copy the original coordinates for later use
 
         // Scale the coordinates
-        float scaleFactor = 16.0;  // Ihtiyacimiz oldugu olcude sekli buyutuyoruz
+        float scaleFactor = 16.0;  
         scaleCoordinates(dataset.points, dataset.numPoints, scaleFactor);
 
-        // SDL kurulumu ve renk kodları
+        // SDL initialization and color codes
         SDL_Init(SDL_INIT_VIDEO);
-        SDL_Window* window = SDL_CreateWindow("Sondaj", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+        SDL_Window* window = SDL_CreateWindow("Sondage Optimized", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
         SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
         SDL_RenderClear(renderer);
         SDL_SetRenderDrawColor(renderer, 0, 255, 0, 0);
 
-        // Ilk koordinatlari baslangıc noktasi olarak atamasini yapiyoruz
+        // We assign the first coordinates as the starting point
         int firstX = dataset.points[0].x;
         int firstY = dataset.points[0].y;
 
@@ -273,24 +273,24 @@ int main(int argc, char* args[])
 
         for(int index=0; index<dataset.numPoints; index++)
         {
-            printf("Veri %d: (%d,%d)\n",index,dataset.points[index].x/16,dataset.points[index].y/16);
+            printf("Data %d: (%d,%d)\n",index,dataset.points[index].x/16,dataset.points[index].y/16);
         }
         printf("\n");
 
         for (int shapeIndex = 0; shapeIndex < dataset.numPoints; ++shapeIndex)
         {
-            // Gecerli sekli ciziyoruz
+            // Drawing the current shape
             for (int i = shapeIndex + 1; i < dataset.numPoints-1; ++i)
             {
-                // Ilk noktanin gecerli noktadan farkli olup olmadigini kontrol ediyoruz
+                // Checking whether the first point is different from the current point
                 if (firstX == dataset.points[i].x && firstY == dataset.points[i].y)
                 {
-                    //kod tekrar ettiyse donguyu bu turluk pas geciyoruz
+                    // Skip the loop round in which the first coordinate values coincide
                     continue;
                 }
                 else
                 {
-                    // Sadece koordinatlar ayni degilse cizim yapiliyor
+                    // Only draw if the coordinates are not the same
                     SDL_RenderDrawLine(renderer, dataset.points[i].x, dataset.points[i].y,
                                        dataset.points[i+1].x,
                                        dataset.points[i+1].y);
@@ -317,18 +317,18 @@ int main(int argc, char* args[])
                            dataset.points[1].y);
         for (int shapeIndex = 0; shapeIndex < dataset.numPoints; ++shapeIndex)
         {
-            // Gecerli sekli ciziyoruz
+            // Drawing current shape
             for (int i = shapeIndex + 1; i < dataset.numPoints-1; ++i)
             {
-                // Ilk noktanin gecerli noktadan farkli olup olmadigini kontrol ediyoruz
+                // Checking whether the first point is different from the current point
                 if (firstX == dataset.points[i].x && firstY == dataset.points[i].y)
                 {
-                    //kod tekrar ettiyse donguyu bu turluk pas geciyoruz
+                    // Skip the loop round in which the first coordinate values coincide
                     continue;
                 }
                 else
                 {
-                    // Sadece koordinatlar ayni degilse cizim yapiliyor
+                    // Only draw if the coordinates are not the same
                     SDL_RenderDrawLine(renderer2, dataset.points[i].x, dataset.points[i].y,
                                        dataset.points[i+1].x,
                                        dataset.points[i+1].y);
@@ -370,7 +370,7 @@ int main(int argc, char* args[])
             }
         }
 
-        // Cokgenler arasinda bir dongu olusturduk ve iclerindeki kareleri parsel karelerle doldurduk
+        // Creating a loop between polygons and filling the squares inside them with parceled squares with blue color
         const int MAX_SQUARES = 100;
         struct FilledSquare filledSquares[MAX_SQUARES];
         for (int polygonIndex = 0; polygonIndex < dataset.numPoints; ++polygonIndex)
@@ -378,19 +378,19 @@ int main(int argc, char* args[])
             struct Point polygon[10];
             int numPolygonPoints = 0;
 
-            // Koordinatlar tekrarlanana kadar gecerli cokgenin koordinatlarini ayristirdik
+            // Parsing the coordinates of the current polygon until the coordinates are repeated
             do
             {
-                // Gecerli noktayi cokgene ekledik
+                // Adding current point to polygon
                 polygon[numPolygonPoints].x = dataset.points[polygonIndex].x;
                 polygon[numPolygonPoints].y = dataset.points[polygonIndex].y;
 
                 numPolygonPoints++;
 
-                // Bir sonraki noktaya gectik
+                // Skiping to next point
                 polygonIndex++;
 
-                // Veri kumesinin sonuna gelirse etrafını saracak sekilde yerlesim duracak bir kosul yazdik
+                // Writing a condition that will stop settling if it reaches the end of the data set, wrapping around it
                 if (polygonIndex >= dataset.numPoints)
                 {
                     polygonIndex = 0;
@@ -406,7 +406,7 @@ int main(int argc, char* args[])
 
             for(int m = 1; m < numPolygonPoints; ++m)
             {
-                // Gecerli cokgenin sinirlayici iskeletini hesapladik
+                // Calculating the bounding skeleton of the current polygon
                 if(minX >= polygon[m].x)
                     minX = polygon[m].x;
                 if(minY >= polygon[m].y)
@@ -422,7 +422,7 @@ int main(int argc, char* args[])
             {
                 for (int k = minY; k <= maxY; k += GRID_SIZE*2)
                 {
-                    // Gecerli noktanin cokgenin icinde olup olmadigini kontrol ettik
+                    // Checking if the current point is inside the polygon
                     if (checkInside(polygon, numPolygonPoints, (struct Point)
                 {
                     j, k
@@ -477,7 +477,7 @@ int main(int argc, char* args[])
             }
 
 
-            // Cokgenler arasinda bir dongu olusturduk ve iclerindeki kareleri parsel karelerle ikinci kez doldurduk
+            // Creating a loop between polygons and filling the squares inside them with parceled squares with green color
             for (int j = minX; j <= maxX; j += GRID_SIZE)
             {
                 for (int k = minY; k <= maxY; k += GRID_SIZE)
@@ -536,7 +536,7 @@ int main(int argc, char* args[])
                 }
             }
 
-            // Cokgenler arasinda bir dongu olusturduk ve iclerindeki kareleri parsel karelerle ucuncu kez doldurduk
+            // Creating a loop between polygons and filling the squares inside them with parceled squares with red color
             for (int j = minX; j <= maxX; j += GRID_SIZE/2)
             {
                 for (int k = minY; k <= maxY; k += GRID_SIZE/2)
@@ -596,7 +596,7 @@ int main(int argc, char* args[])
         }
 
         // Print the selected dataset and total cost
-	printf("Sectiginiz veri seti: \n");
+	printf("Selected dataset: \n");
         printDataset(&dataset,choice);
 
 	// Calculate the total cost of sondage and platform
@@ -605,7 +605,7 @@ int main(int argc, char* args[])
 	int toplamMaliyet = totalCostofSondage + totalPlatformMaliyet;
         
 	printf("\nNumber of squares in the polygon: %d\n", numberOfSquares);
-        printf("Total cost: %d\n", totalSondageCost + totalPlatformCost);
+        printf("Total cost: %d\n", toplamMaliyet);
 
         // Calculate area using original points and total cost
 	calculateArea(originalPoints, dataset.numPoints, toplamMaliyet);
