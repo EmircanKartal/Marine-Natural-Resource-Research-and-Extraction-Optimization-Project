@@ -2,11 +2,22 @@
 ## Overview
 This project, conducted at Kocaeli University's Computer Engineering Department, aims to optimize natural resource exploration and extraction operations in oceans. The goal is to divide the search area into accurate and optimal parcels to maximize profits for a company involved in these operations.
 ## Contributors
-<a href="https://linkedin.com/in/emircankartal" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="emircankartal" height="27" width="36" /></a>
- **Emircan Kartal** 
- 
-<a href="https://www.linkedin.com/in/çağrı-atalar-354692166/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="cagriatalar" height="27" width="36" /></a>
- **Çağrı Atalar**
+<div align="center">
+  <a href="https://linkedin.com/in/emircankartal" target="blank"><img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="emircankartal" height="27" width="36" /></a>
+  <br />
+  Emircan Kartal
+  <br />
+  <a href="mailto:emircankartal1@gmail.com"><img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/mail.svg" alt="Email" height="27" width="36" /></a>
+</div>
+<br />
+<div align="center">
+  <a href="https://www.linkedin.com/in/çağrı-atalar-354692166/" target="blank"><img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="cagriatalar" height="27" width="36" /></a>
+  <br />
+  **Çağrı Atalar**
+  <br />
+  <a href="mailto:cagri.atalar@hotmail.com"><img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/mail.svg" alt="Email" height="27" width="36" /></a>
+</div>
+
 
 ## Getting Started
 ### 1. Prerequisites
@@ -28,6 +39,15 @@ images/: Provides visual representations for better understanding.
 ### 2. Processing: The coordinates are processed and converted into 2D closed area shapes.
 ### 3. Optimization: The areas are optimized by dividing them into square parcels, minimizing costs and maximizing profits.
 ### 4. Visualization: The optimized search areas are visually represented.
+
+![Github photo](https://github.com/EmircanKartal/Marine-Natural-Resource-Research-and-Extraction-Optimization-Project/assets/88210656/a81539e4-3406-46ca-9801-e8e886c46431)
+
+![github2](https://github.com/EmircanKartal/Marine-Natural-Resource-Research-and-Extraction-Optimization-Project/assets/88210656/82399c90-9f74-4024-b250-617a64a8c2a9)
+
+# Parsing Algoritm
+In this project, coordinates from the URL are parsed using a loop that processes the data based on the user's selected row. The coordinates are extracted and stored in the program's data structure (dataset.points[i]) using pre-defined x and y variables. The number of coordinates in the selected row is tracked using the dataset.numPoints variable, allowing for accurate processing and calculations.
+
+![Algoritma son hali](https://github.com/EmircanKartal/Marine-Natural-Resource-Research-and-Extraction-Optimization-Project/assets/88210656/7047f60c-58a9-45d4-b7d8-b69ff4b0f4a8)
 
 ## License
 This project is licensed under the MIT License.
