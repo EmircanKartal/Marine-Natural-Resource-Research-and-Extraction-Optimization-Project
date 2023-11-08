@@ -2,8 +2,11 @@
 ## Overview
 This project, conducted at Kocaeli University's Computer Engineering Department, aims to optimize natural resource exploration and extraction operations in oceans. The goal is to divide the search area into accurate and optimal parcels to maximize profits for a company involved in these operations.
 ## Contributors
-Emircan Kartal
-Çağrı Atalar
+<a href="https://linkedin.com/in/emircankartal" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="emircankartal" height="27" width="36" /></a>
+ **Emircan Kartal** 
+ 
+<a href="https://www.linkedin.com/in/çağrı-atalar-354692166/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="cagriatalar" height="27" width="36" /></a>
+ **Çağrı Atalar**
 
 ## Getting Started
 ### 1. Prerequisites
